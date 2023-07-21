@@ -1,0 +1,5 @@
+@server = http://localhost:4004
+
+### GET Book
+GET {{server}}/browse/Book
+
