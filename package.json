@@ -2,14 +2,15 @@
   "name": "WieGehts",
   "version": "1.0.0",
   "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
+  "repository": "https://github.com/kondiqq/WieGehts.git",
+  "license": "MIT License",
   "private": true,
   "dependencies": {
     "@sap/cds": "^6",
     "express": "^4"
   },
   "devDependencies": {
+    "eslint-plugin-ui5": "^0.1.0",
     "sqlite3": "^5"
   },
   "scripts": {

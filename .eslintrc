@@ -20,7 +20,11 @@
     "cds": true
   },
   "rules": {
+    "ui5/rule-name": 2,
     "no-console": "off",
     "require-atomic-updates": "off"
-  }
+  },
+  "plugins" : [
+    "ui5"
+  ]
 }

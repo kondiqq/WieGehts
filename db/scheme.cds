@@ -3,16 +3,17 @@ namespace sap.starwars;
 using { managed, cuid } from '@sap/cds/common';
 
 
-entity Book : managed {
+entity Book  {
     key ID      :    UUID;
     title       :    String(30);
     publishDate : Date;
     author      : Association to one Author;
-    description : String(1000);
+    description : String(2137);
     publisher   : String;
+    characters  : Association to many Character on characters.books = $self;
 }
 
-entity Author: managed {
+entity Author {
     key ID      :    UUID;
     firstName   : String;
     secondName  : String;
@@ -22,11 +23,12 @@ entity Author: managed {
     nationality : String;
 }
 
-entity Character: managed {
+entity Character {
     key ID :    UUID;
     name   :    String;
     planet :    String;
-    pace   :    String;
+    race   :    String;
     weight :    Integer;
     height :    Integer;
+    books  : Association to many Book;
 }
