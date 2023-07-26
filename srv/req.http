@@ -61,7 +61,10 @@ GET {{server}}/browse/getTheOldestAuthor()
 GET {{server}}/browse/getTheYoungestAuthor()
 
 ###
-GET {{server}}/browse/convertTime(firstDate='15BBY',secondDate='16BBY')
+GET {{server}}/browse/timeBetweenTwoDates(firstDate='15BBY',secondDate='16BBY')
 
 ###
 GET {{server}}/browse/timeBetweenTwoDates(firstDate='15BBY',secondDate='16ABY')
+
+###
+GET {{server}}/browse/convert2ImperialCredit(currType='Wupiupi',quantity=25)

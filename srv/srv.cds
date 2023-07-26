@@ -9,4 +9,5 @@ service Library @(path: '/browse') {
     function getTheOldestAuthor() returns String;
     function getTheYoungestAuthor() returns String;
     function timeBetweenTwoDates(firstDate: String, secondDate: String) returns String;
+    function convert2ImperialCredit(currType: String, quantity: Integer) returns Integer;
 }

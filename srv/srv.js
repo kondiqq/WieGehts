@@ -26,7 +26,7 @@ module.exports = srv => {
         .from(Author).orderBy({birthDate: 'desc'});
         let oResult = await cds.run(oQuery);
         return oResult;
-    })
+    });
 
     srv.on("timeBetweenTwoDates", async (req, res) => {
         const sFirstDate = req.data.firstDate;
@@ -40,5 +40,20 @@ module.exports = srv => {
             return Math.abs(iParsedFirstDateNumber - iParsedSecondDateNumber);
         }
         return iParsedFirstDateNumber + iParsedSecondDateNumber;
-    })
+    });
+
+    srv.on('convert2ImperialCredit', async (req) => {
+        const Peggat2Credit = 0.025;
+        const Trugut2Credit = 0.98;
+        const Wupiupi2Credit = 0.625;
+        if(req.data.currType === "Peggat") {
+            return JSON.stringify(req.data.quantity * Peggat2Credit + "₹");
+        }
+        if(req.data.currType === "Trugut") {
+            return JSON.stringify(req.data.quantity * Trugut2Credit + "₹");
+        }
+        if(req.data.currType === "Wupiupi") {
+            return JSON.stringify(req.data.quantity * Wupiupi2Credit + "₹");
+        }
+    });
 }
