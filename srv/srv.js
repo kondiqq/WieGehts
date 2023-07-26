@@ -27,4 +27,18 @@ module.exports = srv => {
         let oResult = await cds.run(oQuery);
         return oResult;
     })
+
+    srv.on("timeBetweenTwoDates", async (req, res) => {
+        const sFirstDate = req.data.firstDate;
+        const sSecondDate = req.data.secondDate
+        const iFirstDateIndex = sFirstDate.indexOf("BBY") || sFirstDate.indexOf("ABY");
+        const iSecondDateIndex = sSecondDate.indexOf("BBY") || sSecondDate.indexOf("ABY");
+        const iParsedFirstDateNumber = parseInt(sFirstDate.slice(0, iFirstDateIndex));
+        const iParsedSecondDateNumber = parseInt(sSecondDate.slice(0, iSecondDateIndex));
+        if(sFirstDate.includes("BBY") && sSecondDate.includes("BBY") ||
+            sFirstDate.includes("ABY") && sSecondDate.includes("ABY")) {
+            return Math.abs(iParsedFirstDateNumber - iParsedSecondDateNumber);
+        }
+        return iParsedFirstDateNumber + iParsedSecondDateNumber;
+    })
 }
