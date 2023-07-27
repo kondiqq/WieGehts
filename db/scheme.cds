@@ -7,7 +7,7 @@ entity Book  {
     key ID      :    UUID;
     title       :    String(30);
     publishDate : Date;
-    author      : Association to one Author;
+    author      : Association to Author;
     description : String(2137);
     publisher   : String;
     characters  : Association to many Character on characters.books = $self;
@@ -21,6 +21,7 @@ entity Author {
     placeBirth  : String;
     age         : Integer;
     nationality : String;
+    books       : Association to many Book;
 }
 
 entity Character {

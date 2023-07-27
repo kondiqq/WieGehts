@@ -6,8 +6,16 @@ service Library @(path: '/browse') {
     entity Author as projection on sw.Author;
     entity Character as projection on sw.Character;
 
+
+    type convertedImperialCurrency {
+        amount   : Double;
+        currency : String;
+    }
+
+
     function getTheOldestAuthor() returns String;
     function getTheYoungestAuthor() returns String;
-    function timeBetweenTwoDates(firstDate: String, secondDate: String) returns String;
-    function convert2ImperialCredit(currType: String, quantity: Integer) returns Integer;
+    function timeBetweenTwoDates(firstDate: String, secondDate: String) returns Integer;
+    function convert2ImperialCredit(currType: String, quantity: Double) returns convertedImperialCurrency;
+    
 }
