@@ -20,22 +20,17 @@ module.exports = srv => {
 
 //##################### ON
 
-    // srv.on('READ', Author, async(req) => {
-    //     const oExpand = await SELECT.from(Author).expand('books');
-    //     return oExpand;
-    // });
-
     srv.on("getTheOldestAuthor", async (req) => {
-        let oQuery = SELECT `firstName,secondName,birthDate,age,nationality`
+        const oQuery = SELECT `firstName,secondName,birthDate,age,nationality`
         .from(Author).orderBy({birthDate: 'asc'});
-        let oResult = await cds.run(oQuery);
+        const oResult = await cds.run(oQuery);
         return oResult;
     });
 
     srv.on("getTheYoungestAuthor", async (rec) => {
-        let oQuery = SELECT`firstName,secondName,birthDate,age,nationality`
+        const oQuery = SELECT`firstName,secondName,birthDate,age,nationality`
         .from(Author).orderBy({birthDate: 'desc'});
-        let oResult = await cds.run(oQuery);
+        const oResult = await cds.run(oQuery);
         return oResult;
     });
 
@@ -80,6 +75,15 @@ module.exports = srv => {
     });
 
 
+    srv.on('getNoBook', async(req, res) => {
+        const oQuery = SELECT.from(Book).columns("count(ID) as noBooks")
+        return await cds.run(oQuery);
+    });
+
+    srv.on('getNoAuthor', async(req, res) => {
+        const oQuery = SELECT.from(Author).columns("count(ID) as noAuthors")
+        return await cds.run(oQuery);
+    })
     //##################### AFTER
 
 }

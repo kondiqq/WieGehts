@@ -12,10 +12,10 @@ service Library @(path: '/browse') {
         currency : String;
     }
 
-
     function getTheOldestAuthor() returns String;
     function getTheYoungestAuthor() returns String;
     function timeBetweenTwoDates(firstDate: String, secondDate: String) returns Integer;
     function convert2ImperialCredit(currType: String, quantity: Double) returns convertedImperialCurrency;
-    
+    function getNoBook() returns Integer;
+    function getNoAuthor() returns Integer;
 }
