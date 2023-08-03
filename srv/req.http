@@ -59,7 +59,7 @@ GET {{server}}/browse/timeBetweenTwoDates(firstDate='15BBY',secondDate='16BBY')
 GET {{server}}/browse/timeBetweenTwoDates(firstDate='15BBY',secondDate='16ABY')
 
 ###
-GET {{server}}/browse/convert2ImperialCredit(currType='Wupiupi',quantity=10)
+GET {{server}}/browse/convert2ImperialCredit(currType='Wupiup',quantity=10)
 
 ###
 GET {{server}}/browse/getNoBook()

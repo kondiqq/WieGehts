@@ -1,11 +1,14 @@
 const cds = require('@sap/cds');
+const textBundle = require(`./handlers/textBundle`);
 
 module.exports = srv => {
-    const { Book, Author, Character} = srv.entities('Library');
+const { Book, Author, Character} = srv.entities('Library');
 
 //##################### BEFORE
 
     srv.before('CREATE', Author,  (req) => {
+        const locale = req.user.locale;
+        const bundle =textBundle.getTextBundle(locale);
         if(!req.data.age) {
             const dAuthorBDate = new Date(req.data.birthDate);
             const dCurrentDate = new Date();
@@ -56,6 +59,8 @@ module.exports = srv => {
         const Peggat2Credit = 0.025;
         const Trugut2Credit = 0.98;
         const Wupiupi2Credit = 0.625;
+        const locale = req.user.locale;
+        const bundle = textBundle.getTextBundle(locale);
         let iResult = 0.00;
         if(req.data.currType === "Peggat") {
             iResult = parseFloat(req.data.quantity) * Peggat2Credit;
@@ -67,7 +72,7 @@ module.exports = srv => {
             iResult = parseFloat(req.data.quantity) * Wupiupi2Credit;
         }
         else {
-            req.error(406, "Sorry wbut this currency is not supported yet, try again soon ;)")
+            req.error(406, bundle.getText("fillData"))
         }
         return {amount: iResult.toFixed(2), currency:"₹"};
     });
