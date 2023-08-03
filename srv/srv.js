@@ -3,11 +3,9 @@ const cds = require('@sap/cds');
 module.exports = srv => {
     const { Book, Author, Character} = srv.entities('Library');
 
-
 //##################### BEFORE
 
-
-    srv.before('CREATE', Author,  (req, res) => {
+    srv.before('CREATE', Author,  (req) => {
         if(!req.data.age) {
             const dAuthorBDate = new Date(req.data.birthDate);
             const dCurrentDate = new Date();
@@ -20,21 +18,21 @@ module.exports = srv => {
 
 //##################### ON
 
-    srv.on("getTheOldestAuthor", async (req) => {
+    srv.on("getTheOldestAuthor", async () => {
         const oQuery = SELECT `firstName,secondName,birthDate,age,nationality`
         .from(Author).orderBy({birthDate: 'asc'});
         const oResult = await cds.run(oQuery);
         return oResult;
     });
 
-    srv.on("getTheYoungestAuthor", async (rec) => {
+    srv.on("getTheYoungestAuthor", async () => {
         const oQuery = SELECT`firstName,secondName,birthDate,age,nationality`
         .from(Author).orderBy({birthDate: 'desc'});
         const oResult = await cds.run(oQuery);
         return oResult;
     });
 
-    srv.on("timeBetweenTwoDates", async (req, res) => {
+    srv.on("timeBetweenTwoDates", async (req) => {
         const sFirstDate = req.data.firstDate;
         const sSecondDate = req.data.secondDate
         if(sFirstDate.at(0) === "0" && sSecondDate.at(0) === "0"){
@@ -74,16 +72,14 @@ module.exports = srv => {
         return {amount: iResult.toFixed(2), currency:"₹"};
     });
 
-
-    srv.on('getNoBook', async(req, res) => {
+    srv.on('getNoBook', async () => {
         const oQuery = SELECT.from(Book).columns("count(ID) as noBooks")
         return await cds.run(oQuery);
     });
 
-    srv.on('getNoAuthor', async(req, res) => {
+    srv.on('getNoAuthor', async () => {
         const oQuery = SELECT.from(Author).columns("count(ID) as noAuthors")
         return await cds.run(oQuery);
-    })
-    //##################### AFTER
+    });
 
 }
