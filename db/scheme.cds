@@ -4,32 +4,36 @@ using { managed, cuid } from '@sap/cds/common';
 
 
 entity Book  {
-    key ID      :    UUID;
-    title       :    String(30);
-    publishDate : Date;
+    key ID      : UUID;
+    title       : localized String(30);
+    publishDate : localized Date;
     author      : Association to Author;
-    description : String(2137);
-    publisher   : String;
+    description : localized String(2137);
+    publisher   : localized String;
     characters  : Association to many Character on characters.books = $self;
+}
+
+extend entity Book with {
+    
 }
 
 entity Author {
     key ID      : UUID;
-    firstName   : String;
-    secondName  : String;
-    birthDate   : Date;
-    placeBirth  : String;
-    age         : Integer;
-    nationality : String;
+    firstName   : localized String;
+    secondName  : localized String;
+    birthDate   : localized Date;
+    placeBirth  : localized String;
+    age         : localized Integer;
+    nationality : localized String;
     books       : Association to many Book;
 }
 
 entity Character {
     key ID :    UUID;
-    name   :    String;
-    planet :    String;
-    race   :    String;
-    weight :    Integer;
-    height :    Integer;
+    name   : localized String;
+    planet : localized String;
+    race   : localized String;
+    weight : localized Integer;
+    height : localized Integer;
     books  : Association to many Book;
 }
