@@ -27,14 +27,14 @@ content-type: application/json
 
 {
     "author"  :  {
-    	"ID": "28566f06-416d-40f0-b4f3-4ef566aa1427",
-    	"firstName": "James",
-    	"secondName": "Luceno",
-    	"birthDate": "1947-01-01",
-    	"placeBirth": "Bermuda",
-    	"age": 76,
-    	"nationality": "United States",
-    	"books_ID": "067a08e9-d7b4-4486-9094-bc81e96ea89c"
+		"ID": "28566f06-416d-40f0-b4f3-4ef566aa1427",
+		"firstName": "James",
+		"secondName": "Luceno",
+		"birthDate": "1947-01-01",
+		"placeBirth": "Bermuda",
+		"age": 76,
+		"nationality": "United States",
+		"books_ID": "067a08e9-d7b4-4486-9094-bc81e96ea89c"
 	}
 }
 
@@ -66,6 +66,9 @@ GET {{server}}/browse/getNoBook()
 
 ###
 GET {{server}}/browse/getNoAuthor()
+
+###
+GET {{server}}/browse/getPDFFile()
 
 ###
 GET https://swapi.dev/api/starships/9/

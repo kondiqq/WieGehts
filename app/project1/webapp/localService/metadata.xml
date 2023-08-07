@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="Library" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Book" EntityType="Library.Book">
+                    <NavigationPropertyBinding Path="author" Target="Author"/>
+                    <NavigationPropertyBinding Path="characters" Target="Character"/>
+                    <NavigationPropertyBinding Path="texts" Target="Book_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Book_texts"/>
+                </EntitySet>
+                <EntitySet Name="Author" EntityType="Library.Author">
+                    <NavigationPropertyBinding Path="books" Target="Book"/>
+                    <NavigationPropertyBinding Path="texts" Target="Author_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Author_texts"/>
+                </EntitySet>
+                <EntitySet Name="Character" EntityType="Library.Character">
+                    <NavigationPropertyBinding Path="books" Target="Book"/>
+                    <NavigationPropertyBinding Path="texts" Target="Character_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Character_texts"/>
+                </EntitySet>
+                <EntitySet Name="Book_texts" EntityType="Library.Book_texts"/>
+                <EntitySet Name="Author_texts" EntityType="Library.Author_texts"/>
+                <EntitySet Name="Character_texts" EntityType="Library.Character_texts"/>
+                <FunctionImport Name="getTheOldestAuthor" Function="Library.getTheOldestAuthor"/>
+                <FunctionImport Name="getTheYoungestAuthor" Function="Library.getTheYoungestAuthor"/>
+                <FunctionImport Name="timeBetweenTwoDates" Function="Library.timeBetweenTwoDates"/>
+                <FunctionImport Name="convert2ImperialCredit" Function="Library.convert2ImperialCredit"/>
+                <FunctionImport Name="getNoBook" Function="Library.getNoBook"/>
+                <FunctionImport Name="getNoAuthor" Function="Library.getNoAuthor"/>
+                <FunctionImport Name="getPDFFile" Function="Library.getPDFFile"/>
+            </EntityContainer>
+            <EntityType Name="Book">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="30"/>
+                <Property Name="publishDate" Type="Edm.Date"/>
+                <NavigationProperty Name="author" Type="Library.Author" Partner="books">
+                    <ReferentialConstraint Property="author_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="author_ID" Type="Edm.Guid"/>
+                <Property Name="description" Type="Edm.String" MaxLength="2137"/>
+                <Property Name="publisher" Type="Edm.String"/>
+                <NavigationProperty Name="characters" Type="Collection(Library.Character)" Partner="books"/>
+                <NavigationProperty Name="texts" Type="Collection(Library.Book_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="Library.Book_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Author">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="firstName" Type="Edm.String"/>
+                <Property Name="secondName" Type="Edm.String"/>
+                <Property Name="birthDate" Type="Edm.Date"/>
+                <Property Name="placeBirth" Type="Edm.String"/>
+                <Property Name="age" Type="Edm.Int32"/>
+                <Property Name="nationality" Type="Edm.String"/>
+                <NavigationProperty Name="books" Type="Collection(Library.Book)" Partner="author"/>
+                <NavigationProperty Name="texts" Type="Collection(Library.Author_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="Library.Author_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Character">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="planet" Type="Edm.String"/>
+                <Property Name="race" Type="Edm.String"/>
+                <Property Name="weight" Type="Edm.Int32"/>
+                <Property Name="height" Type="Edm.Int32"/>
+                <NavigationProperty Name="books" Type="Collection(Library.Book)" Partner="characters"/>
+                <Property Name="books_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="texts" Type="Collection(Library.Character_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="Library.Character_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Book_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="30"/>
+                <Property Name="publishDate" Type="Edm.Date"/>
+                <Property Name="description" Type="Edm.String" MaxLength="2137"/>
+                <Property Name="publisher" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Author_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="firstName" Type="Edm.String"/>
+                <Property Name="secondName" Type="Edm.String"/>
+                <Property Name="birthDate" Type="Edm.Date"/>
+                <Property Name="placeBirth" Type="Edm.String"/>
+                <Property Name="age" Type="Edm.Int32"/>
+                <Property Name="nationality" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Character_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="planet" Type="Edm.String"/>
+                <Property Name="race" Type="Edm.String"/>
+                <Property Name="weight" Type="Edm.Int32"/>
+                <Property Name="height" Type="Edm.Int32"/>
+            </EntityType>
+            <ComplexType Name="convertedImperialCurrency">
+                <Property Name="amount" Type="Edm.Double"/>
+                <Property Name="currency" Type="Edm.String"/>
+            </ComplexType>
+            <Function Name="getTheOldestAuthor" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Function Name="getTheYoungestAuthor" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Function Name="timeBetweenTwoDates" IsBound="false" IsComposable="false">
+                <Parameter Name="firstDate" Type="Edm.String"/>
+                <Parameter Name="secondDate" Type="Edm.String"/>
+                <ReturnType Type="Edm.Int32"/>
+            </Function>
+            <Function Name="convert2ImperialCredit" IsBound="false" IsComposable="false">
+                <Parameter Name="currType" Type="Edm.String"/>
+                <Parameter Name="quantity" Type="Edm.Double"/>
+                <ReturnType Type="Library.convertedImperialCurrency"/>
+            </Function>
+            <Function Name="getNoBook" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.Int32"/>
+            </Function>
+            <Function Name="getNoAuthor" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.Int32"/>
+            </Function>
+            <Function Name="getPDFFile" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.Boolean"/>
+            </Function>
+            <Annotations Target="Library.Book_texts/locale">
+                <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                </Annotations>
+                <Annotations Target="Library.Author_texts/locale">
+                    <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                    </Annotations>
+                    <Annotations Target="Library.Character_texts/locale">
+                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                        </Annotations>
+                    </Schema>
+                </edmx:DataServices>
+            </edmx:Edmx>

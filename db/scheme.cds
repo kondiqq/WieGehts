@@ -13,10 +13,6 @@ entity Book  {
     characters  : Association to many Character on characters.books = $self;
 }
 
-extend entity Book with {
-    
-}
-
 entity Author {
     key ID      : UUID;
     firstName   : localized String;
@@ -25,7 +21,7 @@ entity Author {
     placeBirth  : localized String;
     age         : localized Integer;
     nationality : localized String;
-    books       : Association to many Book;
+    books       : Association to many Book on books.author = $self;
 }
 
 entity Character {

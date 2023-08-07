@@ -6,14 +6,38 @@
   "license": "MIT License",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^6",
-    "express": "^4"
+    "@cap-js/postgres": "^1.1.0",
+    "@sap/cds": "^7",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
+    "@sap/textbundle": "^4.2.0",
+    "blob-stream": "^0.1.3",
+    "brfs": "^2.0.2",
+    "express": "^4",
+    "pdfkit": "^0.13.0"
   },
   "devDependencies": {
-    "eslint-plugin-ui5": "^0.1.0",
-    "sqlite3": "^5"
+    "@sap/ux-specification": "^1.108.11",
+    "eslint-plugin-ui5": "^0.1.0"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "i18n": {
+        "folders": [
+          "_i18n",
+          "i18n"
+        ],
+        "preserved_locales": [
+          "en_US",
+          "de_DE",
+          "es_MX",
+          "pl_PL",
+          "fr_FR"
+        ]
+      }
+    }
   }
 }

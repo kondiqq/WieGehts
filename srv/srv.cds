@@ -18,4 +18,5 @@ service Library @(path: '/browse') {
     function convert2ImperialCredit(currType: String, quantity: Double) returns convertedImperialCurrency;
     function getNoBook() returns Integer;
     function getNoAuthor() returns Integer;
+    function getPDFFile() returns Boolean;
 }
