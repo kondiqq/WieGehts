@@ -12,9 +12,7 @@ function genPDF() {
     
     // get a blob when you are done
     doc.end();
-    fs.open('out.pdf', 'r', function(err, f){
-        console.log('GreatJob')
-    })
+    fs.existsSync('out.pdf') ? fs.createReadStream('out.pdf').pipe() : console.error('Error')
 }
 
 

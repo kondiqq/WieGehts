@@ -8,9 +8,9 @@ const { Book, Author, Character} = srv.entities('Library');
 
 //##################### BEFORE
 
-    srv.before('CREATE', Author,  (req) => {
+    srv.before('CREATE', Author,  req => {
         const locale = req.user.locale;
-        const bundle =textBundle.getTextBundle(locale);
+        const bundle = textBundle.getTextBundle(locale);
         if(!req.data.age) {
             const dAuthorBDate = new Date(req.data.birthDate);
             const dCurrentDate = new Date();
@@ -19,6 +19,11 @@ const { Book, Author, Character} = srv.entities('Library');
             ? dCurrentDate.getFullYear() - dAuthorBDate.getFullYear() - 1
             : dCurrentDate.getFullYear() - dAuthorBDate.getFullYear();
         }
+    });
+
+    srv.on('CREATE', Character, req => {
+        const locale = req.user.locale;
+        const bundle = textBundle.getTextBundle(locale);
     });
 
 //##################### ON

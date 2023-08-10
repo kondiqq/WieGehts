@@ -1,7 +1,33 @@
-<mvc:View controllerName="libka.project1.controller.View1"
+<mvc:View xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" controllerName="libka.project1.controller.View1"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
-        <content />
+        <content>
+            <smartfilterbar:SmartFilterBar>
+            </smartfilterbar:SmartFilterBar>
+            <smarttable:SmartTable id="mainSmartable" tableType="AnalyticalTable" header="JanuszPawlacz" 
+            enableAutoBinding="true" editTogglable="true" >
+                <Table items="{/Book}" >
+            <columns>
+                <Column>
+                    <Label text="Title"/>
+                </Column>
+                <Column>
+                    <Label text="Author"/>
+                </Column>
+                <Column>
+                    <Label text="Description"/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <Text text="{title}"/>
+                    <Text text="{author_ID}"/>
+                    <Text text="{description}"/>
+                </ColumnListItem>
+            </items>
+            </Table>
+            </smarttable:SmartTable>
+        </content>
     </Page>
 </mvc:View>

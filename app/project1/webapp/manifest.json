@@ -31,7 +31,7 @@
     "technology": "UI5",
     "icons": {
       "icon": "",
-      "favIcon": "",
+      "favIcon": "./utils/vaticano2137.png",
       "phone": "",
       "phone@2": "",
       "tablet": "",
