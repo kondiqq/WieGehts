@@ -1,12 +1,17 @@
 <mvc:View xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" controllerName="libka.project1.controller.View1"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    <Page id="page" title="{i18n>title}" titleAlignment="Center">
         <content>
             <smartfilterbar:SmartFilterBar>
             </smartfilterbar:SmartFilterBar>
             <smarttable:SmartTable id="mainSmartable" tableType="AnalyticalTable" header="JanuszPawlacz" 
-            enableAutoBinding="true" editTogglable="true" >
+            enableAutoBinding="true" editTogglable="true">
+            <Toolbar>
+                <ToolbarSpacer/>
+                <ToolbarSpacer/>
+                <Button text="{i18n>BtnAddBook}" press="extendLibrary"/>
+            </Toolbar>   
                 <Table items="{/Book}" >
             <columns>
                 <Column>

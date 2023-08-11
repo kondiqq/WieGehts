@@ -31,7 +31,7 @@
     "technology": "UI5",
     "icons": {
       "icon": "",
-      "favIcon": "./utils/vaticano2137.png",
+      "favIcon": "",
       "phone": "",
       "phone@2": "",
       "tablet": "",
@@ -78,6 +78,9 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "tableViewModel" : {
+        "type" : "sap.ui.model.json.JSONModel"
       }
     },
     "resources": {
@@ -95,19 +98,20 @@
         "viewPath": "libka.project1.view",
         "controlAggregation": "pages",
         "controlId": "app",
-        "clearControlAggregation": false
+        "clearControlAggregation": false,
+        "path" : "libka.project1.view"
       },
       "routes": [
         {
-          "name": "RouteView1",
           "pattern": ":?query:",
+          "name": "View1",
           "target": [
-            "TargetView1"
+            "View1"
           ]
         }
       ],
       "targets": {
-        "TargetView1": {
+        "View1": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
