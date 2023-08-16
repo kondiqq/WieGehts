@@ -47,10 +47,10 @@ Content-Type: application/json
 }
 
 ###
-GET {{server}}/browse/getTheOldestAuthor()
+GET {{server}}/v2/browse/getTheOldestAuthor()
 
 ###
-GET {{server}}/browse/getTheYoungestAuthor()
+GET {{server}}/v2/browse/getTheYoungestAuthor()
 
 ###
 GET {{server}}/browse/timeBetweenTwoDates(firstDate='15BBY',secondDate='16BBY')
@@ -59,13 +59,13 @@ GET {{server}}/browse/timeBetweenTwoDates(firstDate='15BBY',secondDate='16BBY')
 GET {{server}}/browse/timeBetweenTwoDates(firstDate='15BBY',secondDate='16ABY')
 
 ###
-GET {{server}}/browse/convert2ImperialCredit(currType='Wupiup',quantity=10)
+GET {{server}}/browse/convert2ImperialCredit(currType='Wupiupi',quantity=10)
 
 ###
-GET {{server}}/browse/getNoBook()
+GET {{server}}/v2/browse/getNoBook()
 
 ###
-GET {{server}}/browse/getNoAuthor()
+GET {{server}}/v2/browse/getNoAuthor()
 
 ###
 GET {{server}}/browse/getPDFFile()
