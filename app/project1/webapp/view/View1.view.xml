@@ -5,8 +5,12 @@
         <content>
             <smartfilterbar:SmartFilterBar id="smartFilterBar" liveMode="false">
             </smartfilterbar:SmartFilterBar>
-            <smarttable:SmartTable id="mainSmartable" tableType="AnalyticalTable" header="JanuszPawlacz" entitySet="Book" smartFilterId="smartFilterBar" showRowCount="true"
+            <smarttable:SmartTable id="mainSmartable" tableType="AnalyticalTable" header="{i18n>title}" entitySet="Book" smartFilterId="smartFilterBar" showRowCount="true"
             initiallyVisibleFields="title,author,description,publisher,publishDate" >
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button id="booCreator" press="onAddBookPress" icon="sap-icon://add"/>
+            </Toolbar>
                 <Table>
                     <columns>
 

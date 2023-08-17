@@ -4,7 +4,7 @@
 GET {{server}}/browse/Book HTTP/1.1
 
 ### GET Author
-GET {{server}}/browse/Author HTTP/1.1
+GET {{server}}/browse/Author(28566a06-416d-40f0-b4f3-4ef566aa1427) HTTP/1.1
 
 ### GET Character
 GET {{server}}/browse/Character HTTP/1.1

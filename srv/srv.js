@@ -1,7 +1,6 @@
 const cds = require('@sap/cds');
 const textBundle = require(`./handlers/textBundle`);
 const pdfGen = require(`./handlers/pdfGenerete`);
-const fs = require('fs');
 
 module.exports = srv => {
 const { Book, Author, Character} = srv.entities('Library');
@@ -95,7 +94,7 @@ const { Book, Author, Character} = srv.entities('Library');
     });
 
     srv.on('getPDFFile', async (req, res)=>{
-        const oFile = pdfGen.genPDF();
+        const oFile = pdfGen.generatePDF();
         console.log(oFile);
     });
 }
