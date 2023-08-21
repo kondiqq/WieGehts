@@ -12,7 +12,7 @@
             </FlexBox>  
             <FlexBox alignItems="Center" justifyContent="Center">
                 <Text text="{i18n>txtFragAuthor}"/>
-                <ComboBox id="idFragmentCombobox" tooltip="{i18n>txtComboboxAuthorTooltip}" items="{
+                <ComboBox id="idFragmentCombobox" placeholder="{i18n>txtComboboxAuthorTooltip}" items="{
                     path: '/Author'
                 }">
                 <core:Item key="{ID}" text="{firstName} {secondName}"/>
@@ -29,6 +29,3 @@
         </content>
     </Dialog>
 </core:FragmentDefinition>
-
-
-<!-- Line 8  after items="{path: '/ActionTypes'}" : [{ path : userVisibility, operator : EQ, value1 : true}]  -->

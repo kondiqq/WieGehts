@@ -43,17 +43,17 @@ sap.ui.define([
                 let oModel = this.getView().getModel();
                 const sTitle = this.byId("idTitleInput").getValue();
                 const dPickDate = this.byId("bookReleasePicker").getDateValue();
-                const sAuthor = this.byId("idFragmentCombobox").getSelectedKey();
-                const sDescription = this.byId("idTitleDescription").getSelectedKey();
-                const sPath = `/Author(${sAuthor})`;
-                oModel.read(sPath, {
+                const sAuthorID = this.byId("idFragmentCombobox").getSelectedKey();
+                const sDescription = this.byId("idTitleDescription").getValue();
+                const sPath = `/Author`;
+                let oAuthor = oModel.read(sPath, {
                     success: function(oData, oResp) {
                         console.log(oData);
                         return oData;
                     },
                     error: function(err){
                         console.error(err);
-                        MessageBox.error("Something went wrong... \n Contact with support team please");
+                        MessageBox.error(this.getI18nText("txtError"));
                     }
                 })
                 const oPayload = {
@@ -71,44 +71,61 @@ sap.ui.define([
                         MessageBox.error("Something went wrong");
                     }
                 });
-                this.onPressCancel();
-                
+                this.clearFragmentInputs();
+                this.byId("idFragmentBook").close();
             },
 
             onPressCancel:function() {
+                const sTitle = this.byId("idTitleInput").getValue();
+                const dPickDate = this.byId("bookReleasePicker").getDateValue();
+                const sAuthorID = this.byId("idFragmentCombobox").getSelectedKey();
+                const sDescription = this.byId("idTitleDescription").getValue();
+                sTitle || dPickDate || sAuthorID || sDescription ? this.messageDirtFlag() : this.byId("idFragmentBook").close();
+                this.clearFragmentInputs();
                 this.byId("idFragmentBook").close();
+            },
+
+            messageDirtFlag: function() {
+                MessageBox.warning(
+                    this.getI18nText("txtDirtFlag"),
+                    {
+                        icon: MessageBox.Icon.WARNING,
+                        title: this.getI18nText("hdrDirtyFlag"),
+                        actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                        emphasizedAction: MessageBox.Action.OK,
+                        onClose: function() {
+                            this.clearFragmentInputs();
+                            this.byId("idFragmentBook").close();
+                        },
+                        initialFocus: MessageBox.Action.CANCEL,
+                    }
+                );
+            },
+
+            clearFragmentInputs: function() {
+                this.byId("idTitleInput").setValue(null);
+                this.byId("bookReleasePicker").setValue(null);;
+                this.byId("idFragmentCombobox").setValue(null);;
+                this.byId("idTitleDescription").setValue(null);
             },
 
             convert2GalacticCredits: function(sCurrency, iValue) {
                 let oModel = this.getView().getModel();
                 oModel.callFunction("", {
                     method: "GET",
-                    urlParameters: {},
+                    urlParameters: {
+                        quantity: iValue,
+                        currType: sCurrency
+                    },
                     success: function(oData) {
                         console.log("Exchanged");
                     },
                     error: function(err) {
-                        MessageBox.error("It's something wrong");
+                        MessageBox.error("It's something wrong\n Please contact with administrator");
                         console.error("It's something wrong", err);
                     }
                 });
             },
-
-            // getSmthFoo: function(oModel, oSavedModel, sFuncName, oObjParam, sModelPath) {
-            //     oModel.callFunction(`/${sFuncName}`, {
-            //         method: "GET",
-            //         success: function(oData) {
-            //             const oParam = oData.oObjParam;
-            //             console.log('OK', oData);
-            //             oSavedModel.setProperty(`${sModelPath}`, oParam); //"/Authors/OldestAuthor"
-            //         },
-            //         error: function(err){
-            //             MessageBox.error(`It's something wrong`);
-            //             console.log('No OK', err);
-            //             console.error(err);
-            //         }
-            //     });
-            // },
 
             getTheOldest: function(oModel, oSavedModel) {
                 oModel.callFunction("/getTheOldestAuthor", {
